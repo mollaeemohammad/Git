@@ -82,12 +82,6 @@
 		<Unit filename="D:/GitProject/cli/Cli.h">
 			<Option target="GitProject"/>
 		</Unit>
-		<Unit filename="D:/GitProject/core/CompileHelper.c">
-			<Option target="GitProject"/>
-		</Unit>
-		<Unit filename="D:/GitProject/core/CompileHelper.h">
-			<Option target="GitProject"/>
-		</Unit>
 		<Unit filename="D:/GitProject/core/Core.c">
 			<Option target="GitProject"/>
 		</Unit>

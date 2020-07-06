@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <sys/time.h>
 
 #define MAX_FILE_NAME 500
 #define MAX_PATH_CHAR 1000
@@ -12,16 +13,10 @@ struct fileId {
     int id;
 };
 
-String showCurrentHistory(struct ResultData *resultData);
 int saveCurrentHistory(struct ResultData *data, String resultString);
 int saveHiddenHistory(String result, struct fileId *filesId, int id);
 void showHistoryList(struct fileId *filesId, int historyItemsNumber);
 int showHistoryFile(struct fileId *filesId);
-int historyMenu(String userArgument);
-int isNumberEqual(int allUserInputs, int expectedUserInputs);
-int cliCompile(int expectedUserInputs, int allUserInput, String userArguments[]);
-int cliGenerate(int expectedUserInputs, int allUserInputs, String userArguments[]);
-int cliJudge(int expectedUserInputs, int allUserInputs, String userArguments[]);
 
 /**
  * main function that executes all user command
@@ -31,7 +26,7 @@ int cliJudge(int expectedUserInputs, int allUserInputs, String userArguments[]);
  */
 int runCli(int argc, String argv[]) {
     int userInput = 1;
-
+    /*
 
     if (argc == 1) {
         changeConsoleColor(COLOR_BLOCK_RED);
@@ -90,6 +85,7 @@ int runCli(int argc, String argv[]) {
     print("Thanks for using judge!\n");
     changeConsoleColor(COLOR_WHITE);
     return True;
+     */
 }
 
 /**
@@ -103,25 +99,6 @@ void changeConsoleColor(int colorCode) {
     SetConsoleTextAttribute(hConsole, colorCode);
 }
 
-
-/**
- * prints the result of judge
- * @param resultData  struct of result
- * @return resultString  str of result
- */
-String showCurrentHistory(struct ResultData *resultData) {
-    String resultString = toJson(resultData);
-
-    changeConsoleColor(COLOR_BLOCK_YELLOW);
-    print("The result of judging your code is: \n");
-
-    changeConsoleColor(COLOR_LIGHT_BLUE);
-    print("%20s", resultString);
-    changeConsoleColor(COLOR_WHITE);
-
-    return resultString;
-}
-
 /**
  * saves your current judge histories (public and private)
  * @param data  data of judging result packed in a structure
@@ -129,6 +106,7 @@ String showCurrentHistory(struct ResultData *resultData) {
  * @return enum that show if the function works properly
  */
 int saveCurrentHistory(struct ResultData *data, String resultString) {
+    /*
     char choose;
 
     changeConsoleColor(COLOR_BLOCK_YELLOW);
@@ -183,6 +161,7 @@ int saveCurrentHistory(struct ResultData *data, String resultString) {
         changeConsoleColor(COLOR_WHITE);
         return False;
     }
+     */
 }
 
 /**
@@ -193,7 +172,7 @@ int saveCurrentHistory(struct ResultData *data, String resultString) {
  * @return enum shows if program works properly.
  */
 int saveHiddenHistory(String result, struct fileId *filesId, int id) {
-
+/*
     String savePath = (String) malloc(MAX_PATH_CHAR);
     print("Please enter your desired path for saving this file (either relative or absolute): ");
     scanf("%s", savePath);
@@ -212,6 +191,7 @@ int saveHiddenHistory(String result, struct fileId *filesId, int id) {
         free(savePath);
         return False;
     }
+    */
 }
 
 /**
@@ -220,6 +200,7 @@ int saveHiddenHistory(String result, struct fileId *filesId, int id) {
  * @param historyItemsNumber number of all files in hidden history directory
  */
 void showHistoryList(struct fileId *filesId, int historyItemsNumber) {
+    /*
     changeConsoleColor(COLOR_BLOCK_YELLOW);
     print("Your total number of history files is '%d'; Your file names is as follows:\n\n", historyItemsNumber);
     changeConsoleColor(COLOR_WHITE);
@@ -227,6 +208,7 @@ void showHistoryList(struct fileId *filesId, int historyItemsNumber) {
     loop(i, historyItemsNumber) {
         print(" %d.  %s\n", filesId[i].id, filesId[i].fileName);
     }
+     */
 }
 
 /**

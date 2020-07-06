@@ -8,9 +8,9 @@
 #include "string.h"
 
 #define MAX_LINE_SIZE 1000
-#define MAX_RESULT_SIZE MAX_LINE_SIZE*999
+#define MAX_RESULT_SIZE MAX_LINE_SIZE*99
 #define MAX_FILE_RESULT_COUNT 9999
-#define MAX_FILE_NAME 1000
+#define MAX_FILE_NAME 100
 #define FILE_FLAG 0
 
 String fileAddressMaker(String path, String filename);

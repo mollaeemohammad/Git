@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/GitProject.dir/cli/Cli.c.obj"
-  "CMakeFiles/GitProject.dir/core/CompileHelper.c.obj"
   "CMakeFiles/GitProject.dir/core/Core.c.obj"
   "CMakeFiles/GitProject.dir/core/FileHelper.c.obj"
   "CMakeFiles/GitProject.dir/main.c.obj"
