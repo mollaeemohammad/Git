@@ -27,12 +27,12 @@ String currentTime(){
  * @param data object that represent the analysis of the output data
  * @return json object that represent data
  */
-String toJson(struct ResultData *data) {
-    String testCases = malloc(data->testCaseNumber * sizeof(struct TestCaseData));
+String toJson(struct logData *data) {
+    String testCases = malloc(data->caseNumber * sizeof(struct CommitData));
 
-    for (int i = 0; i < data->testCaseNumber; ++i) {
-        struct TestCaseData testCase = data->testCases[i];
-        String item = (String)malloc(MAX_SIZE_ITEM_STRING * sizeof(struct TestCaseData));
+    for (int i = 0; i < data->caseNumber; ++i) {
+        struct CommitData case = data->cases[i];
+        String item = (String)malloc(MAX_SIZE_ITEM_STRING * sizeof(struct CommitData));
         print("");
         sprintf(item, "    {\n"
                       "      \t\"testCaseNumber\": %i,\n"
