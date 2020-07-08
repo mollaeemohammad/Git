@@ -161,8 +161,17 @@ String fileAddressMaker(String path, String filename) {
  * @param filename
  * @return is the file delete or not
  */
-enum Boolean deleteFile(String filePath, String filename) {
+enum Boolean delete(String filePath, String filename, enum ShowKind kind) {
     String fileAddress = fileAddressMaker(filePath, filename);
-    int res = remove(fileAddress);
-    return res ? False : True;
+    if (kind == File) {
+        int res = remove(fileAddress);
+        return res ? False : True;
+    } else if (kind == Folder) {
+        String command = (String) malloc(sizeof(char) * MAX_FILE_NAME);
+        sprintf(command, "rmdir /Q /S %s", fileAddress);
+        system(command);
+        free(command);
+        return isFolderExist(fileAddress) ? False : True;
+    }
 }
+

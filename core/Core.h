@@ -12,6 +12,7 @@ struct CommitData {
     String date;
     String message;
 };
+
 struct logData {
     String path;
     String fileName;
@@ -19,6 +20,8 @@ struct logData {
     struct CommitData *cases;
 
 };
+
+
 
 String toJson(struct logData *data);
 
