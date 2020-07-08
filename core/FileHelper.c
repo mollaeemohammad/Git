@@ -8,9 +8,9 @@
 #include "string.h"
 
 #define MAX_LINE_SIZE 1000
-#define MAX_RESULT_SIZE MAX_LINE_SIZE*999
+#define MAX_RESULT_SIZE MAX_LINE_SIZE*99
 #define MAX_FILE_RESULT_COUNT 9999
-#define MAX_FILE_NAME 1000
+#define MAX_FILE_NAME 100
 #define FILE_FLAG 0
 
 String fileAddressMaker(String path, String filename);
@@ -161,8 +161,17 @@ String fileAddressMaker(String path, String filename) {
  * @param filename
  * @return is the file delete or not
  */
-enum Boolean deleteFile(String filePath, String filename) {
+enum Boolean delete(String filePath, String filename, enum ShowKind kind) {
     String fileAddress = fileAddressMaker(filePath, filename);
-    int res = remove(fileAddress);
-    return res ? False : True;
+    if (kind == File) {
+        int res = remove(fileAddress);
+        return res ? False : True;
+    } else if (kind == Folder) {
+        String command = (String) malloc(sizeof(char) * MAX_FILE_NAME);
+        sprintf(command, "rmdir /Q /S %s", fileAddress);
+        system(command);
+        free(command);
+        return isFolderExist(fileAddress) ? False : True;
+    }
 }
+

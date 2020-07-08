@@ -149,33 +149,6 @@ cli/Cli.c.s:
 	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/cli/Cli.c.s
 .PHONY : cli/Cli.c.s
 
-core/CompileHelper.obj: core/CompileHelper.c.obj
-
-.PHONY : core/CompileHelper.obj
-
-# target to build an object file
-core/CompileHelper.c.obj:
-	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/core/CompileHelper.c.obj
-.PHONY : core/CompileHelper.c.obj
-
-core/CompileHelper.i: core/CompileHelper.c.i
-
-.PHONY : core/CompileHelper.i
-
-# target to preprocess a source file
-core/CompileHelper.c.i:
-	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/core/CompileHelper.c.i
-.PHONY : core/CompileHelper.c.i
-
-core/CompileHelper.s: core/CompileHelper.c.s
-
-.PHONY : core/CompileHelper.s
-
-# target to generate assembly for a file
-core/CompileHelper.c.s:
-	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/core/CompileHelper.c.s
-.PHONY : core/CompileHelper.c.s
-
 core/Core.obj: core/Core.c.obj
 
 .PHONY : core/Core.obj
@@ -269,9 +242,6 @@ help:
 	@echo ... cli/Cli.obj
 	@echo ... cli/Cli.i
 	@echo ... cli/Cli.s
-	@echo ... core/CompileHelper.obj
-	@echo ... core/CompileHelper.i
-	@echo ... core/CompileHelper.s
 	@echo ... core/Core.obj
 	@echo ... core/Core.i
 	@echo ... core/Core.s

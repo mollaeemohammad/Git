@@ -5,7 +5,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "D:/GitProject/cli/Cli.c" "D:/GitProject/cmake-build-debug/CMakeFiles/GitProject.dir/cli/Cli.c.obj"
-  "D:/GitProject/core/CompileHelper.c" "D:/GitProject/cmake-build-debug/CMakeFiles/GitProject.dir/core/CompileHelper.c.obj"
   "D:/GitProject/core/Core.c" "D:/GitProject/cmake-build-debug/CMakeFiles/GitProject.dir/core/Core.c.obj"
   "D:/GitProject/core/FileHelper.c" "D:/GitProject/cmake-build-debug/CMakeFiles/GitProject.dir/core/FileHelper.c.obj"
   "D:/GitProject/main.c" "D:/GitProject/cmake-build-debug/CMakeFiles/GitProject.dir/main.c.obj"

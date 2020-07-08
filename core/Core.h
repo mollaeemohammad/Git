@@ -5,26 +5,25 @@
 #include <stdlib.h>
 #include "stdio.h"
 #include "FileHelper.h"
-#include "CompileHelper.h"
 
-struct TestCaseData {
-    int testCaseNumber;
-    enum Boolean isPass;
+
+struct CommitData {
+    int id;
+    String date;
     String message;
-    String output;
 };
-struct ResultData {
+
+struct logData {
     String path;
     String fileName;
-    String date;
-    String score;
-    String message;
-    int testCaseNumber;
-    struct TestCaseData *testCases;
+    int caseNumber;
+    struct CommitData *cases;
 
 };
 
-String toJson(struct ResultData *data);
+
+
+String toJson(struct logData *data);
 
 String strConcat(String list[], int size);
 

@@ -1,6 +1,14 @@
 #pragma once
 
 #include "Macros.h"
+#include <conio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+enum ShowKind {File, Folder};
 
 String readFile(String path, String filename);
 
@@ -14,4 +22,4 @@ enum Boolean isFileExist(String path, String filename);
 
 enum Boolean isFolderExist(String path);
 
-enum Boolean deleteFile(String filePath , String filename);
+enum Boolean delete(String filePath, String filename, enum ShowKind kind);

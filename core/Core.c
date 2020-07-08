@@ -5,9 +5,8 @@
 #include "string.h"
 #include <time.h>
 
-#define MAX_SIZE_ITEM_STRING 10000000
-#define MAX_SIZE_RESULT_STRING 100000
-#define MAX_CONCAT_LEN 1000000
+#define MAX_SIZE_ITEM_STRING 1000
+#define MAX_CONCAT_LEN 1000
 
 /**
  * this function returns the current time
@@ -22,42 +21,49 @@ String currentTime(){
     return dateString;
 }
 
+enum Boolean initGit(){
+    enum Boolean gitStatus, commits;
+    if(isFolderExist(".\\git")){
+       print("the git is initialized in past");
+        return True;
+    }
+    gitStatus = !_mkdir(".\\git");
+    if(gitStatus){
+        commits = !_mkdir(".\\git\\commits");
+        if (commits)
+            return True;
+        else
+            return False;
+    } else {
+        print("There is something wrong to initializing the git\n");
+        return False;
+    }
+}
+
 /**
  *
  * @param data object that represent the analysis of the output data
  * @return json object that represent data
  */
-String toJson(struct ResultData *data) {
-    String testCases = malloc(data->testCaseNumber * sizeof(struct TestCaseData));
+String toJson(struct logData *data) {
+    String cases = malloc(data->caseNumber * sizeof(struct CommitData));
 
-    for (int i = 0; i < data->testCaseNumber; ++i) {
-        struct TestCaseData testCase = data->testCases[i];
-        String item = (String)malloc(MAX_SIZE_ITEM_STRING * sizeof(struct TestCaseData));
+    for (int i = 0; i < data->caseNumber; ++i) {
+        struct CommitData tempCommitData = data->cases[i];
+        String item = (String)malloc(MAX_SIZE_ITEM_STRING * sizeof(struct CommitData));
         print("");
         sprintf(item, "    {\n"
-                      "      \t\"testCaseNumber\": %i,\n"
-                      "      \t\"isPass\": %s,\n"
+                      "      \t\"id\": %i,\n"
+                      "      \t\"date\": %s,\n"
                       "      \t\"message\": \"%s\",\n"
-                      "    },\n", testCase.testCaseNumber, testCase.isPass ? "true" : "false",
-                testCase.message);
-        String a[2]={testCases,item};
-        testCases= strConcat(a,2);
-//        strcat(testCases, item);
+                      "    },\n", tempCommitData.id, tempCommitData.date,
+                tempCommitData.message);
+        String a[2]={cases,item};
+        cases= strConcat(a,2);
+        strcat(cases, item);
         free(item);
     }
-    String result = malloc(MAX_SIZE_RESULT_STRING + MAX_SIZE_ITEM_STRING * data->testCaseNumber * sizeof(struct TestCaseData));
-    sprintf(result, "{\n"
-                    "  \"path\": \"%s\",\n"
-                    "  \"filename\": \"%s\",\n"
-                    "  \"date\": \"%s\",\n"
-                    "  \"score\": \"%s\",\n"
-                    "  \"message\": \"%s\",\n"
-                    "  \"testCases\": [\n"
-                    "%s"
-                    "  ]\n"
-                    "}", data->path, data->fileName, data->date, data->score, data->message, testCases);
-
-    return result;
+    return cases;
 
 }
 
@@ -75,3 +81,4 @@ String strConcat(String list[], int size){
     return result;
 
 }
+
