@@ -21,25 +21,39 @@ String currentTime() {
             tm.tm_min, tm.tm_sec);
     return dateString;
 }
-
+/**
+ * this function makes the directories and files which we need to initialize the git
+ * @return if it works good then returns true else is false
+ */
 enum Boolean initGit() {
     enum Boolean gitStatus, commits;
     String nameFile = (String) malloc(sizeof(char) * FILENAME_MAX);
-    String headFile = (String) malloc(sizeof(char) * MAX_SIZE_FILE);
+    String forInfo = (String) malloc(sizeof(char) * FILENAME_MAX);
+    String headFile;
     if (isFolderExist(".\\git")) {
         print("the git is initialized in past");
         return True;
     }
     gitStatus = !_mkdir(".\\git");
     if (gitStatus) {
+        _mkdir(".\\git\\stash");
+
         printf("\nEnter the name of file: \n");
         scanf("%[^\n]", nameFile);
         headFile = readFile(".\\", nameFile);
+        sprintf(forInfo, "0\n%s",nameFile);
+
+        writeFile(".\\", "Info.txt", forInfo);
+
+        writeFile(".\\", "status.txt", "");
+
         writeFile(".\\git", "HEAD.txt", headFile);
+
         commits = !_mkdir(".\\git\\commits");
+
         if (commits) {
             _mkdir(".\\git\\commits\\0");
-            writeFile(".\\git\\commits\\0", "file", headFile);
+            writeFile(".\\git\\commits\\0", "file.txt", headFile);
             return True;
         }
         else
@@ -49,6 +63,8 @@ enum Boolean initGit() {
         return False;
     }
 }
+
+
 
 /**
  *

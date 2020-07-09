@@ -94,6 +94,12 @@
 		<Unit filename="D:/GitProject/core/FileHelper.h">
 			<Option target="GitProject"/>
 		</Unit>
+		<Unit filename="D:/GitProject/core/Log.c">
+			<Option target="GitProject"/>
+		</Unit>
+		<Unit filename="D:/GitProject/core/Log.h">
+			<Option target="GitProject"/>
+		</Unit>
 		<Unit filename="D:/GitProject/core/Macros.h">
 			<Option target="GitProject"/>
 		</Unit>

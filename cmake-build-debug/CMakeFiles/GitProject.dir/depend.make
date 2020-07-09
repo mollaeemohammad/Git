@@ -7,6 +7,7 @@ CMakeFiles/GitProject.dir/cli/Cli.c.obj: ../core/Core.h
 CMakeFiles/GitProject.dir/cli/Cli.c.obj: ../core/FileHelper.h
 CMakeFiles/GitProject.dir/cli/Cli.c.obj: ../core/Macros.h
 
+CMakeFiles/GitProject.dir/core/Core.c.obj: ../cli/Cli.h
 CMakeFiles/GitProject.dir/core/Core.c.obj: ../core/Core.c
 CMakeFiles/GitProject.dir/core/Core.c.obj: ../core/Core.h
 CMakeFiles/GitProject.dir/core/Core.c.obj: ../core/FileHelper.h

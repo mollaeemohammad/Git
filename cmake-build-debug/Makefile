@@ -203,6 +203,33 @@ core/FileHelper.c.s:
 	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/core/FileHelper.c.s
 .PHONY : core/FileHelper.c.s
 
+core/Log.obj: core/Log.c.obj
+
+.PHONY : core/Log.obj
+
+# target to build an object file
+core/Log.c.obj:
+	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/core/Log.c.obj
+.PHONY : core/Log.c.obj
+
+core/Log.i: core/Log.c.i
+
+.PHONY : core/Log.i
+
+# target to preprocess a source file
+core/Log.c.i:
+	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/core/Log.c.i
+.PHONY : core/Log.c.i
+
+core/Log.s: core/Log.c.s
+
+.PHONY : core/Log.s
+
+# target to generate assembly for a file
+core/Log.c.s:
+	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/core/Log.c.s
+.PHONY : core/Log.c.s
+
 main.obj: main.c.obj
 
 .PHONY : main.obj
@@ -248,6 +275,9 @@ help:
 	@echo ... core/FileHelper.obj
 	@echo ... core/FileHelper.i
 	@echo ... core/FileHelper.s
+	@echo ... core/Log.obj
+	@echo ... core/Log.i
+	@echo ... core/Log.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

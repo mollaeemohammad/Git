@@ -22,7 +22,7 @@ struct logData {
 
 };
 
-
+enum Boolean initGit();
 
 String toJson(struct logData *data);
 
