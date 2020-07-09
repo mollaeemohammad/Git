@@ -6,6 +6,7 @@
 #include "stdio.h"
 #include "FileHelper.h"
 
+#define MAX_SIZE_FILE 10000
 
 struct CommitData {
     int id;
