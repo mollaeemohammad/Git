@@ -1,4 +1,4 @@
-À#include <stdio.h>
+#include <stdio.h>
 #include "core/FileHelper.h"
 #include "core/Macros.h"
 #include "core/Core.h"

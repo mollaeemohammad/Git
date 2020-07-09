@@ -5,8 +5,11 @@
 #include <stdlib.h>
 #include "stdio.h"
 #include "FileHelper.h"
+#include "Log.h"
 
 #define MAX_SIZE_FILE 10000
+#define MAX_ARRAY_SIZE 1000
+#define MIN_ARRAY_SIZE 100
 
 struct CommitData {
     int id;

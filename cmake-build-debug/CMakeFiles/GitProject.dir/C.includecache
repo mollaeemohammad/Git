@@ -6,18 +6,6 @@
 
 #IncludeRegexTransform: 
 
-D:/GitProject/cli/Cli.c
-Cli.h
-D:/GitProject/cli/Cli.h
-windows.h
--
-dirent.h
--
-sys/stat.h
--
-sys/time.h
--
-
 D:/GitProject/cli/Cli.h
 ../core/Core.h
 D:/GitProject/core/Core.h
@@ -49,24 +37,22 @@ stdio.h
 D:/GitProject/core/stdio.h
 FileHelper.h
 D:/GitProject/core/FileHelper.h
+Log.h
+D:/GitProject/core/Log.h
 
 D:/GitProject/core/FileHelper.h
 Macros.h
 D:/GitProject/core/Macros.h
 
-D:/GitProject/core/Macros.h
-
-D:/GitProject/main.c
-stdio.h
+D:/GitProject/core/Log.h
+stdlib.h
 -
-core/FileHelper.h
+stdio.h
+D:/GitProject/core/stdio.h
+FileHelper.h
 D:/GitProject/core/FileHelper.h
-core/Macros.h
-D:/GitProject/core/Macros.h
-core/Core.h
-D:/GitProject/core/Core.h
-cli/Cli.h
-D:/GitProject/cli/Cli.h
 string.h
 -
+
+D:/GitProject/core/Macros.h
 

@@ -28,7 +28,7 @@ String currentTime() {
  */
 enum Boolean initGit() {
     enum Boolean gitStatus, commits;
-    struct logData firstLog;
+    struct logData *firstLog;
     String nameFile = (String) malloc(sizeof(char) * FILENAME_MAX);
     String forInfo = (String) malloc(sizeof(char) * FILENAME_MAX);
     String headFile;
@@ -45,11 +45,14 @@ enum Boolean initGit() {
         headFile = readFile(".\\", nameFile);
         sprintf(forInfo, "0\n%s", nameFile);
 
-        writeFile(".\\", "Info.txt", forInfo);
+        writeFile(".\\git", "Info.txt", forInfo);
 
-        writeFile(".\\", "status.txt", "");
+        writeFile(".\\git", "status.txt", "");
 
-        writeFile(".\\", "select.txt", "");
+        firstLog = initLogData(".\\", nameFile);
+        writeFile(".\\git", "log.txt", toJson(firstLog));
+
+        writeFile(".\\git", "select.txt", "");
 
         writeFile(".\\git", "HEAD.txt", headFile);
 
@@ -75,21 +78,19 @@ enum Boolean initGit() {
  */
 String toJson(struct logData *data) {
     String cases = malloc(data->caseNumber * sizeof(struct CommitData));
-
+    cases[0] = '\0';
+    String item = (String) malloc(MAX_SIZE_ITEM_STRING * sizeof(struct CommitData));
     for (int i = 0; i < data->caseNumber; ++i) {
         struct CommitData tempCommitData = data->cases[i];
-        String item = (String) malloc(MAX_SIZE_ITEM_STRING * sizeof(struct CommitData));
-        print("");
         sprintf(item, "    {\n"
                       "      \t\"id\": %i,\n"
                       "      \t\"date\": %s,\n"
                       "      \t\"message\": \"%s\",\n"
                       "    },\n", tempCommitData.id, tempCommitData.date,
                 tempCommitData.message);
-        String a[2] = {cases, item};
-        cases = strConcat(a, 2);
+//        String a[2] = {cases, item};
+//        cases = strConcat(a, 2);
         strcat(cases, item);
-        free(item);
     }
     return cases;
 
