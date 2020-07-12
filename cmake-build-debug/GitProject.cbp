@@ -82,6 +82,12 @@
 		<Unit filename="D:/GitProject/cli/Cli.h">
 			<Option target="GitProject"/>
 		</Unit>
+		<Unit filename="D:/GitProject/core/Change.c">
+			<Option target="GitProject"/>
+		</Unit>
+		<Unit filename="D:/GitProject/core/Change.h">
+			<Option target="GitProject"/>
+		</Unit>
 		<Unit filename="D:/GitProject/core/Core.c">
 			<Option target="GitProject"/>
 		</Unit>
