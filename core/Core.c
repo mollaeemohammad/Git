@@ -22,33 +22,54 @@ String currentTime() {
     return dateString;
 }
 
+/**
+ * this function makes the directories and files which we need to initialize the git
+ * @return if it works good then returns true else is false
+ */
 enum Boolean initGit() {
     enum Boolean gitStatus, commits;
+    struct logData *firstLog;
     String nameFile = (String) malloc(sizeof(char) * FILENAME_MAX);
-    String headFile = (String) malloc(sizeof(char) * MAX_SIZE_FILE);
+    String forInfo = (String) malloc(sizeof(char) * FILENAME_MAX);
+    String headFile;
     if (isFolderExist(".\\git")) {
         print("the git is initialized in past");
         return True;
     }
     gitStatus = !_mkdir(".\\git");
     if (gitStatus) {
+        _mkdir(".\\git\\stash");
+
         printf("\nEnter the name of file: \n");
         scanf("%[^\n]", nameFile);
         headFile = readFile(".\\", nameFile);
+        sprintf(forInfo, "0\n%s", nameFile);
+
+        writeFile(".\\git", "Info.txt", forInfo);
+
+        writeFile(".\\git", "status.txt", "");
+
+        firstLog = initLogData(".\\", nameFile);
+        writeFile(".\\git", "log.txt", toJson(firstLog));
+
+        writeFile(".\\git", "select.txt", "");
+
         writeFile(".\\git", "HEAD.txt", headFile);
+
         commits = !_mkdir(".\\git\\commits");
+
         if (commits) {
             _mkdir(".\\git\\commits\\0");
-            writeFile(".\\git\\commits\\0", "file", headFile);
+            writeFile(".\\git\\commits\\0", "file.txt", headFile);
             return True;
-        }
-        else
+        } else
             return False;
     } else {
         print("There is something wrong to initializing the git\n");
         return False;
     }
 }
+
 
 /**
  *
@@ -57,21 +78,19 @@ enum Boolean initGit() {
  */
 String toJson(struct logData *data) {
     String cases = malloc(data->caseNumber * sizeof(struct CommitData));
-
+    cases[0] = '\0';
+    String item = (String) malloc(MAX_SIZE_ITEM_STRING * sizeof(struct CommitData));
     for (int i = 0; i < data->caseNumber; ++i) {
         struct CommitData tempCommitData = data->cases[i];
-        String item = (String) malloc(MAX_SIZE_ITEM_STRING * sizeof(struct CommitData));
-        print("");
         sprintf(item, "    {\n"
                       "      \t\"id\": %i,\n"
                       "      \t\"date\": %s,\n"
                       "      \t\"message\": \"%s\",\n"
                       "    },\n", tempCommitData.id, tempCommitData.date,
                 tempCommitData.message);
-        String a[2] = {cases, item};
-        cases = strConcat(a, 2);
+//        String a[2] = {cases, item};
+//        cases = strConcat(a, 2);
         strcat(cases, item);
-        free(item);
     }
     return cases;
 

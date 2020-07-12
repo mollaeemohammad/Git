@@ -22,21 +22,22 @@ String fileAddressMaker(String path, String filename);
  * @return file data as a Text
  */
 String readFile(String path, String filename) {
-    String fileAddress = fileAddressMaker(path, filename);
-
+    String fileAddress = (String) malloc(sizeof(char) * MAX_FILE_NAME);
+    sprintf(fileAddress, "%s\\%s", path, filename);
     FILE *file = fopen(fileAddress, "r");
     if (!file) {
         return NULL;
     }
     // read file line by line
     String result = malloc(sizeof(char) * MAX_RESULT_SIZE);
+    result[0] = '\0';
     String line = malloc(sizeof(char) * MAX_LINE_SIZE);
     while ((line = fgets(line, MAX_LINE_SIZE, file))) {
         strcat(result, line);
     }
+    fclose(file);
     free(fileAddress);
     free(line);
-    fclose(file);
     return result;
 
 }
@@ -49,8 +50,8 @@ String readFile(String path, String filename) {
  * @return isSuccessful
  */
 enum Boolean writeFile(String path, String filename, String content) {
-    String fileAddress = fileAddressMaker(path, filename);
-
+    String fileAddress = (String) malloc(sizeof(char) * MAX_FILE_NAME);
+    sprintf(fileAddress, "%s\\%s", path, filename);
     FILE *file = fopen(fileAddress, "w");
     if (!file) {
         return False;
@@ -115,7 +116,8 @@ enum Boolean makeDirectories(String path[], int n) {
  * @return 1 if exits and 0 for not exists
  */
 enum Boolean isFileExist(String path, String filename) {
-    String fileAddress = fileAddressMaker(path, filename);
+    String fileAddress = (String) malloc(sizeof(char) * MAX_FILE_NAME);
+    sprintf(fileAddress, "%s\\%s", path, filename);
     struct stat buffer;
     int notExist = stat(fileAddress, &buffer);
     return notExist ? False : True;

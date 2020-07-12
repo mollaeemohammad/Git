@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "D:/GitProject/cli/Cli.c" "D:/GitProject/cmake-build-debug/CMakeFiles/GitProject.dir/cli/Cli.c.obj"
   "D:/GitProject/core/Core.c" "D:/GitProject/cmake-build-debug/CMakeFiles/GitProject.dir/core/Core.c.obj"
   "D:/GitProject/core/FileHelper.c" "D:/GitProject/cmake-build-debug/CMakeFiles/GitProject.dir/core/FileHelper.c.obj"
+  "D:/GitProject/core/Log.c" "D:/GitProject/cmake-build-debug/CMakeFiles/GitProject.dir/core/Log.c.obj"
   "D:/GitProject/main.c" "D:/GitProject/cmake-build-debug/CMakeFiles/GitProject.dir/main.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
