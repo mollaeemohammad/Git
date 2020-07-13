@@ -16,7 +16,7 @@ struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray
 
     struct Diff *tempDiff = (struct Diff *) malloc(sizeof(struct Diff *));
     tempDiff->parameter = (struct StringOrAddress *) malloc(sizeof(struct StringOrAddress) * MAX_LINE_NUMBER);
-    for(int i =0; i< MAX_LINE_NUMBER; i++){
+    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
         tempDiff->parameter[i].string = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
     }
 
@@ -49,4 +49,16 @@ struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray
         }
     }
     return tempDiff;
+}
+
+void showChanges(struct Diff *diff) {
+    int isChanged = 0;
+    for (int i = 0; i < diff->size; i++) {
+        if (diff->sign[i] == 0) {
+            printf("%d\n%s", i + 1, diff->parameter[i].string);
+            isChanged = 1;
+        }
+    }
+    if(!isChanged)
+        puts("No Changes!\n");
 }

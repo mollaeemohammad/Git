@@ -10,6 +10,10 @@ D:/GitProject/cli/Cli.h
 ../core/Core.h
 D:/GitProject/core/Core.h
 
+D:/GitProject/core/Change.c
+Change.h
+D:/GitProject/core/Change.h
+
 D:/GitProject/core/Change.h
 stdio.h
 -

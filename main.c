@@ -23,12 +23,13 @@ int main() {
     }
     struct Diff *temp;
     temp = findChanges("test.txt", fileArray, HEADArray);
-    for(int i =0; i<temp->size; i++){
-        if(temp->sign[i] == 0)
-            printf("%s",temp->parameter[i].string);
-        else if(temp->sign[i] == 1){
-            printf("%d\n", temp->parameter[i].address);
-        }
-    }
+//    for(int i =0; i<temp->size; i++){
+//        if(temp->sign[i] == 0)
+//            printf("%s",temp->parameter[i].string);
+//        else if(temp->sign[i] == 1){
+//            printf("%d\n", temp->parameter[i].address);
+//        }
+//    }
+    showChanges(temp);
     return 0;
 }
