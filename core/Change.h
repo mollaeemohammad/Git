@@ -25,3 +25,5 @@ struct Diff{
 struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray[]);
 
 void showChanges(struct Diff *diff);
+
+void writeDiffPage(struct Diff *diff);

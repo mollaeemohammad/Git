@@ -96,6 +96,19 @@ String toJson(struct logData *data) {
 
 }
 
+enum Boolean getInformation(struct information *inform){
+    FILE *file;
+    file = fopen("git\\Info.txt", "r");
+    if(file == NULL){
+        return False;
+    }
+    fscanf(file, "%d", &inform->id);
+    char parasite;
+    parasite = fgetc(file);
+    fscanf(file, "%[^\n]", inform->fileName);
+    return True;
+}
+
 /**
  * concat list of strings
  * @param list

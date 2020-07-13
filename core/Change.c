@@ -59,6 +59,26 @@ void showChanges(struct Diff *diff) {
             isChanged = 1;
         }
     }
-    if(!isChanged)
-        puts("No Changes!\n");
+    if (!isChanged)
+        puts("No Changes!");
+}
+
+void writeDiffPage(struct Diff *diff) {
+    struct information *tempInfo = (struct information *) malloc(sizeof(struct information *));
+    tempInfo->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+    if (getInformation(tempInfo)) {
+        String tempNumberString = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+        String fileAddress = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+        sprintf(fileAddress, ".\\git\\commits\\%d\\diffPage.txt", tempInfo->id + 1);
+        FILE *diffPage = fopen(fileAddress, "w");
+        for (int i = 0; i < diff->size; i++) {
+            if (diff->sign[i] == 1) {
+                fprintf(diffPage, "1\n");
+                fprintf(diffPage, "%d\n", diff->parameter[i].address);
+            } else if (diff->sign[i] == 0) {
+                fprintf(diffPage, "0\n");
+                fprintf(diffPage, "%s", diff->parameter[i].string);
+            }
+        }
+    }
 }

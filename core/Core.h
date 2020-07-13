@@ -25,6 +25,11 @@ struct logData {
 
 };
 
+struct information{
+    int id;
+    String fileName;
+};
+
 enum Boolean initGit();
 
 String toJson(struct logData *data);
@@ -32,3 +37,5 @@ String toJson(struct logData *data);
 String strConcat(String list[], int size);
 
 String currentTime();
+
+enum Boolean getInformation(struct information *inform);

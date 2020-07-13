@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-D:/GitProject/cli/Cli.h
-../core/Core.h
-D:/GitProject/core/Core.h
-
 D:/GitProject/core/Change.c
 Change.h
 D:/GitProject/core/Change.h
@@ -57,22 +53,4 @@ string.h
 -
 
 D:/GitProject/core/Macros.h
-
-D:/GitProject/main.c
-stdio.h
--
-core/FileHelper.h
-D:/GitProject/core/FileHelper.h
-core/Change.h
-D:/GitProject/core/Change.h
-core/Macros.h
-D:/GitProject/core/Macros.h
-core/Core.h
-D:/GitProject/core/Core.h
-cli/Cli.h
-D:/GitProject/cli/Cli.h
-string.h
--
-core/Change.h
-D:/GitProject/core/Change.h
 

@@ -15,6 +15,7 @@ int main() {
 //        printf("ok");
 //    else
 //        printf("fault");
+
     String *fileArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
     String *HEADArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
     for (int i = 0; i < MAX_LINE_NUMBER; i++) {
@@ -30,6 +31,12 @@ int main() {
 //            printf("%d\n", temp->parameter[i].address);
 //        }
 //    }
-    showChanges(temp);
+//    showChanges(temp);
+
+//    struct information *testInfo = (struct information *) malloc(sizeof(struct information*));
+//    testInfo->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+//    getInformation(testInfo);
+//    printf("%d\n%s", testInfo->id, testInfo->fileName);
+    writeDiffPage(temp);
     return 0;
 }
