@@ -59,6 +59,8 @@ stdio.h
 -
 core/FileHelper.h
 D:/GitProject/core/FileHelper.h
+core/Change.h
+D:/GitProject/core/Change.h
 core/Macros.h
 D:/GitProject/core/Macros.h
 core/Core.h

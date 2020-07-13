@@ -7,17 +7,19 @@
 #include "Core.h"
 #include "Log.h"
 
-#define MAX_LINE_SIZE 256
-#define MAX_LINE_NUMBER 200
+#define MAX_LINE_SIZE 70
+#define MAX_LINE_NUMBER 50
 #define fileGets(str,file) fgets(str, MAX_LINE_SIZE, file)
 
-union StringOrAddress{
+struct StringOrAddress{
     int address;
     String string;
 };
 
 struct Diff{
-    int sign;
-    union StringOrAddress parameter;
+    int size;
+    int sign[MAX_LINE_NUMBER];
+    struct StringOrAddress *parameter;
 };
 
+struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray[]);

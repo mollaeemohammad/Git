@@ -7,28 +7,46 @@ enum Boolean isChanged(String nameOfFile) {
     return strcmp(innerOfFile, innerOfHEAD) ? True : False;
 }
 
-String findChanges(String nameOfFile) {
+
+struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray[]) {
     char filesAddress[50];
-    String *fileArray = (String*) malloc(MAX_LINE_NUMBER * sizeof(String));
-    String *HEADArray = (String*) malloc(MAX_LINE_NUMBER * sizeof(String));
-    for(int i = 0; i<MAX_LINE_NUMBER; i++){
-        fileArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
-        HEADArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
-    }
+
     String tempLineFile = (String) malloc(MAX_LINE_SIZE * sizeof(char));
     String tempLineHEAD = (String) malloc(MAX_LINE_SIZE * sizeof(char));
 
     struct Diff *tempDiff = (struct Diff *) malloc(sizeof(struct Diff *));
+    tempDiff->parameter = (struct StringOrAddress *) malloc(sizeof(struct StringOrAddress) * MAX_LINE_NUMBER);
+    for(int i =0; i< MAX_LINE_NUMBER; i++){
+        tempDiff->parameter[i].string = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+    }
+
     sprintf(filesAddress, ".\\%s", nameOfFile);
     FILE *file = fopen(filesAddress, "r");
     sprintf(filesAddress, ".\\git\\HEAD.txt");
     FILE *HEAD = fopen(filesAddress, "r");
-    int sizeOfFile = 0, sizeOfHEAD = 0;
+    int sizeOfFile = 0, sizeOfHEAD = 0, found = 0;
 
     while (tempLineFile = fileGets(tempLineFile, file)) {
-        fileArray[sizeOfFile++] = tempLineFile;
+        strcpy(fileArray[sizeOfFile++], tempLineFile);
     }
-    while (tempLineHEAD = fileGets(tempLineHEAD, HEAD)){
-        HEADArray[sizeOfHEAD++] = tempLineHEAD;
+    tempDiff->size = sizeOfFile;
+    while (tempLineHEAD = fileGets(tempLineHEAD, HEAD)) {
+        strcpy(HEADArray[sizeOfHEAD++], tempLineHEAD);
     }
+    for (int i = 0; i < sizeOfFile; i++) {
+        found = 0;
+        for (int j = i; j < sizeOfHEAD; j++) {
+            if (!strcmp(HEADArray[i], fileArray[j])) {
+                tempDiff->sign[i] = 1;
+                tempDiff->parameter[i].address = j;
+                found = 1;
+                break;
+            }
+        }
+        if (!found) {
+            tempDiff->sign[i] = 0;
+            tempDiff->parameter[i].string = fileArray[i];
+        }
+    }
+    return tempDiff;
 }
