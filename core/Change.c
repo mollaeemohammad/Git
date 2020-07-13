@@ -16,8 +16,10 @@ struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray
 
     struct Diff *tempDiff = (struct Diff *) malloc(sizeof(struct Diff *));
     tempDiff->parameter = (struct StringOrAddress *) malloc(sizeof(struct StringOrAddress) * MAX_LINE_NUMBER);
+    tempDiff->sign = (int *) malloc(sizeof(int) * MAX_LINE_NUMBER);
     for (int i = 0; i < MAX_LINE_NUMBER; i++) {
         tempDiff->parameter[i].string = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+        tempDiff->sign[i] = (int) malloc(sizeof(int));
     }
 
     sprintf(filesAddress, ".\\%s", nameOfFile);
@@ -81,4 +83,30 @@ void writeDiffPage(struct Diff *diff) {
             }
         }
     }
+}
+
+enum Boolean getDiffPage(struct Diff *diff, int id) {
+    char parasite;
+    String diffPageAddress = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+    sprintf(diffPageAddress, ".\\git\\commits\\%d\\diffPage.txt", id);
+    FILE *diffPage = fopen(diffPageAddress, "r");
+    if (diffPage == NULL)
+        return False;
+    int size = 0;
+    for (int i = 0; !feof(diffPage); i++) {
+        fscanf(diffPage, "%d", &diff->sign[i]);
+        if (diff->sign[i] == 1) {
+            parasite = fgetc(diffPage);
+            fscanf(diffPage, "%d", &diff->parameter[i].address);
+        } else if (diff->sign[i] == 0) {
+            parasite = fgetc(diffPage);
+            fscanf(diffPage, "%[^\n]", diff->parameter[i].string);
+        }
+        size++;
+    }
+    size--;
+    diff->size = size;
+    free(diffPageAddress);
+    fclose(diffPage);
+    return True;
 }

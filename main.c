@@ -16,14 +16,16 @@ int main() {
 //    else
 //        printf("fault");
 
-    String *fileArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
-    String *HEADArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
-    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
-        fileArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
-        HEADArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
-    }
-    struct Diff *temp;
-    temp = findChanges("test.txt", fileArray, HEADArray);
+//    String *fileArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
+//    String *HEADArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
+//    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
+//        fileArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
+//        HEADArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
+//    }
+//    struct Diff *temp;
+//    temp = findChanges("test.txt", fileArray, HEADArray);
+//    writeDiffPage(temp);
+
 //    for(int i =0; i<temp->size; i++){
 //        if(temp->sign[i] == 0)
 //            printf("%s",temp->parameter[i].string);
@@ -37,6 +39,16 @@ int main() {
 //    testInfo->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
 //    getInformation(testInfo);
 //    printf("%d\n%s", testInfo->id, testInfo->fileName);
-    writeDiffPage(temp);
+
+    struct Diff *diff = (struct Diff *) malloc(sizeof(struct Diff *));
+    diff->sign = (int *) malloc(sizeof(int) * MAX_LINE_NUMBER);
+    diff->parameter = (struct StringOfAddress *) malloc(sizeof(struct StringOfAddress *) * MAX_LINE_NUMBER);
+    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
+        diff->parameter[i].string = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+        diff->sign[i] = (int) malloc(sizeof(int));
+    }
+    getDiffPage(diff, 1);
+    printf("%d\n", diff->sign[0]);
+
     return 0;
 }

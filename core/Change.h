@@ -9,16 +9,16 @@
 
 #define MAX_LINE_SIZE 70
 #define MAX_LINE_NUMBER 50
-#define fileGets(str,file) fgets(str, MAX_LINE_SIZE, file)
+#define fileGets(str, file) fgets(str, MAX_LINE_SIZE, file)
 
-struct StringOrAddress{
+struct StringOrAddress {
     int address;
     String string;
 };
 
-struct Diff{
+struct Diff {
     int size;
-    int sign[MAX_LINE_NUMBER];
+    int *sign;
     struct StringOrAddress *parameter;
 };
 
@@ -27,3 +27,5 @@ struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray
 void showChanges(struct Diff *diff);
 
 void writeDiffPage(struct Diff *diff);
+
+enum Boolean getDiffPage(struct Diff *diff, int id);
