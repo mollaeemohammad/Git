@@ -16,14 +16,14 @@ int main() {
 //    else
 //        printf("fault");
 
-//    String *fileArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
-//    String *HEADArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
-//    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
-//        fileArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
-//        HEADArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
-//    }
-//    struct Diff *temp;
-//    temp = findChanges("test.txt", fileArray, HEADArray);
+    String *fileArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
+    String *HEADArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
+    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
+        fileArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
+        HEADArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
+    }
+    struct Diff *temp;
+    temp = findChanges("test.txt", fileArray, HEADArray);
 //    writeDiffPage(temp);
 
 //    for(int i =0; i<temp->size; i++){
@@ -51,5 +51,7 @@ int main() {
 //    printf("%d\n", diff->sign[0]);
 
 //    writeInformation("main.c", 0);
+
+    commit(temp,fileArray);
     return 0;
 }

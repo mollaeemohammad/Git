@@ -6,6 +6,7 @@
 #include "stdio.h"
 #include "FileHelper.h"
 #include "Log.h"
+#include "Change.h"
 
 #define MAX_SIZE_FILE 10000
 #define MAX_ARRAY_SIZE 1000
@@ -25,7 +26,7 @@ struct logData {
 
 };
 
-struct information{
+struct information {
     int id;
     String fileName;
 };
@@ -41,3 +42,5 @@ String currentTime();
 enum Boolean getInformation(struct information *inform);
 
 enum Boolean writeInformation(String name, int id);
+
+enum Boolean commit(struct Diff *diff, String *fileArray);

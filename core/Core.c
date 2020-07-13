@@ -5,6 +5,7 @@
 #include "string.h"
 #include "../cli/Cli.h"
 #include <time.h>
+#include "Change.h"
 
 #define MAX_SIZE_ITEM_STRING 1000
 #define MAX_CONCAT_LEN 1000
@@ -106,16 +107,29 @@ enum Boolean getInformation(struct information *inform) {
     char parasite;
     parasite = fgetc(file);
     fscanf(file, "%[^\n]", inform->fileName);
+    fclose(file);
     return True;
 }
 
 enum Boolean writeInformation(String name, int id) {
     FILE *infoFile = fopen(".\\git\\Info.txt", "w");
-    if(infoFile == NULL)
+    if (infoFile == NULL)
         return False;
     fprintf(infoFile, "%d\n", id);
     fprintf(infoFile, "%s\n", name);
     return True;
+}
+
+enum Boolean commit(struct Diff *diff, String *fileArray) {
+    FILE *HEAD = fopen(".\\git\\HEAD.txt", "w");
+    for (int i = 0; i < diff->size; i++) {
+        fprintf(HEAD, "%s", fileArray[i]);
+    }
+    writeDiffPage(diff);
+    struct information *inform = (struct Information *) malloc(sizeof(struct Information *));
+    inform->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+    getInformation(inform);
+    writeInformation(inform->fileName, inform->id+1);
 }
 
 /**
