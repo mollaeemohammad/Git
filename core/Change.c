@@ -72,6 +72,8 @@ void writeDiffPage(struct Diff *diff) {
         String fileAddress = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
         sprintf(fileAddress, ".\\git\\commits\\%d\\diffPage.txt", tempInfo->id + 1);
         FILE *diffPage = fopen(fileAddress, "w");
+        if (diffPage == NULL)
+            return;
         for (int i = 0; i < diff->size; i++) {
             if (diff->sign[i] == 1) {
                 fprintf(diffPage, "1\n");
@@ -81,6 +83,7 @@ void writeDiffPage(struct Diff *diff) {
                 fprintf(diffPage, "%s", diff->parameter[i].string);
             }
         }
+        fclose(diffPage);
     }
 }
 

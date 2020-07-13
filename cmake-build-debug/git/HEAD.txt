@@ -8,7 +8,7 @@
 
 int main() {
     //delete("D:\\GitProject", "GitProject", Folder);
-//    _mkdir(".\\test");
+    _mkdir(".\\test");
     if(initGit())
         printf("ok");
     else

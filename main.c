@@ -52,6 +52,14 @@ int main() {
 
 //    writeInformation("main.c", 0);
 
-    commit(temp,fileArray);
+//    commit(temp,fileArray);
+
+    String *newArray = (String *) malloc(sizeof(String *) * MAX_LINE_NUMBER);
+    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
+        newArray[i] = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+    }
+//    maker(newArray, HEADArray, 1);
+//    gotoId(HEADArray, 1);
+    reset(HEADArray, 1);
     return 0;
 }

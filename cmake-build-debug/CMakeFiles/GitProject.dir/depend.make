@@ -3,6 +3,7 @@
 
 CMakeFiles/GitProject.dir/cli/Cli.c.obj: ../cli/Cli.c
 CMakeFiles/GitProject.dir/cli/Cli.c.obj: ../cli/Cli.h
+CMakeFiles/GitProject.dir/cli/Cli.c.obj: ../core/Change.h
 CMakeFiles/GitProject.dir/cli/Cli.c.obj: ../core/Core.h
 CMakeFiles/GitProject.dir/cli/Cli.c.obj: ../core/FileHelper.h
 CMakeFiles/GitProject.dir/cli/Cli.c.obj: ../core/Log.h
@@ -16,6 +17,7 @@ CMakeFiles/GitProject.dir/core/Change.c.obj: ../core/Log.h
 CMakeFiles/GitProject.dir/core/Change.c.obj: ../core/Macros.h
 
 CMakeFiles/GitProject.dir/core/Core.c.obj: ../cli/Cli.h
+CMakeFiles/GitProject.dir/core/Core.c.obj: ../core/Change.h
 CMakeFiles/GitProject.dir/core/Core.c.obj: ../core/Core.c
 CMakeFiles/GitProject.dir/core/Core.c.obj: ../core/Core.h
 CMakeFiles/GitProject.dir/core/Core.c.obj: ../core/FileHelper.h
@@ -26,6 +28,7 @@ CMakeFiles/GitProject.dir/core/FileHelper.c.obj: ../core/FileHelper.c
 CMakeFiles/GitProject.dir/core/FileHelper.c.obj: ../core/FileHelper.h
 CMakeFiles/GitProject.dir/core/FileHelper.c.obj: ../core/Macros.h
 
+CMakeFiles/GitProject.dir/core/Log.c.obj: ../core/Change.h
 CMakeFiles/GitProject.dir/core/Log.c.obj: ../core/Core.h
 CMakeFiles/GitProject.dir/core/Log.c.obj: ../core/FileHelper.h
 CMakeFiles/GitProject.dir/core/Log.c.obj: ../core/Log.c

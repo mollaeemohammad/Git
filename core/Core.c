@@ -117,19 +117,60 @@ enum Boolean writeInformation(String name, int id) {
         return False;
     fprintf(infoFile, "%d\n", id);
     fprintf(infoFile, "%s\n", name);
+    fclose(infoFile);
     return True;
 }
 
 enum Boolean commit(struct Diff *diff, String *fileArray) {
-    FILE *HEAD = fopen(".\\git\\HEAD.txt", "w");
-    for (int i = 0; i < diff->size; i++) {
-        fprintf(HEAD, "%s", fileArray[i]);
-    }
     writeDiffPage(diff);
     struct information *inform = (struct Information *) malloc(sizeof(struct Information *));
     inform->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
     getInformation(inform);
-    writeInformation(inform->fileName, inform->id+1);
+    writeInformation(inform->fileName, inform->id + 1);
+    FILE *HEAD = fopen(".\\git\\HEAD.txt", "w");
+    for (int i = 0; i < diff->size; i++) {
+        fprintf(HEAD, "%s", fileArray[i]);
+    }
+    return True;
+}
+
+void maker(String *newArray, String *HEADArray, int id) {
+    struct Diff *tempDiff = (struct Diff *) malloc(sizeof(struct Diff *));
+    tempDiff->parameter = (struct StringOrAddress *) malloc(sizeof(struct StringOrAddress) * MAX_LINE_NUMBER);
+    tempDiff->sign = (int *) malloc(sizeof(int) * MAX_LINE_NUMBER);
+    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
+        tempDiff->parameter[i].string = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+        tempDiff->sign[i] = (int) malloc(sizeof(int));
+    }
+    getDiffPage(tempDiff, id);
+    for (int i = 0; i < tempDiff->size; i++) {
+        if (tempDiff->sign[i] == 1) {
+            strcpy(newArray[i], HEADArray[tempDiff->parameter[i].address]);
+        } else if (tempDiff->sign[i] == 0) {
+            strcpy(newArray[i], tempDiff->parameter[i].string);
+        }
+    }
+}
+
+void gotoId(String *HEADArray, int id) {
+    for (int i = 1; i <= id; i++) {
+        maker(HEADArray, HEADArray, i);
+    }
+}
+
+void reset(String *HEADArray, int id) {
+    int numberOfFoldersInCommits, tempNumber;
+    char numberString[5];
+    String *filesInDir;
+    filesInDir = getFilesInDirectory(".\\git\\commits", &numberOfFoldersInCommits);
+    gotoId(HEADArray, id);
+    for (int i = 0; i < numberOfFoldersInCommits; i++) {
+        sscanf(filesInDir[i], "%d", &tempNumber);
+        if (tempNumber > id) {
+            sprintf(numberString, "%d", tempNumber);
+            delete(".\\git\\commits", numberString, Folder);
+        }
+    }
 }
 
 /**
