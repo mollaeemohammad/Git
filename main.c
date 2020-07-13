@@ -40,15 +40,16 @@ int main() {
 //    getInformation(testInfo);
 //    printf("%d\n%s", testInfo->id, testInfo->fileName);
 
-    struct Diff *diff = (struct Diff *) malloc(sizeof(struct Diff *));
-    diff->sign = (int *) malloc(sizeof(int) * MAX_LINE_NUMBER);
-    diff->parameter = (struct StringOfAddress *) malloc(sizeof(struct StringOfAddress *) * MAX_LINE_NUMBER);
-    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
-        diff->parameter[i].string = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
-        diff->sign[i] = (int) malloc(sizeof(int));
-    }
-    getDiffPage(diff, 1);
-    printf("%d\n", diff->sign[0]);
+//    struct Diff *diff = (struct Diff *) malloc(sizeof(struct Diff *));
+//    diff->sign = (int *) malloc(sizeof(int) * MAX_LINE_NUMBER);
+//    diff->parameter = (struct StringOfAddress *) malloc(sizeof(struct StringOfAddress *) * MAX_LINE_NUMBER);
+//    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
+//        diff->parameter[i].string = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+//        diff->sign[i] = (int) malloc(sizeof(int));
+//    }
+//    getDiffPage(diff, 1);
+//    printf("%d\n", diff->sign[0]);
 
+//    writeInformation("main.c", 0);
     return 0;
 }

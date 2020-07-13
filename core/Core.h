@@ -39,3 +39,5 @@ String strConcat(String list[], int size);
 String currentTime();
 
 enum Boolean getInformation(struct information *inform);
+
+enum Boolean writeInformation(String name, int id);

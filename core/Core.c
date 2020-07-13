@@ -96,16 +96,25 @@ String toJson(struct logData *data) {
 
 }
 
-enum Boolean getInformation(struct information *inform){
+enum Boolean getInformation(struct information *inform) {
     FILE *file;
     file = fopen("git\\Info.txt", "r");
-    if(file == NULL){
+    if (file == NULL) {
         return False;
     }
     fscanf(file, "%d", &inform->id);
     char parasite;
     parasite = fgetc(file);
     fscanf(file, "%[^\n]", inform->fileName);
+    return True;
+}
+
+enum Boolean writeInformation(String name, int id) {
+    FILE *infoFile = fopen(".\\git\\Info.txt", "w");
+    if(infoFile == NULL)
+        return False;
+    fprintf(infoFile, "%d\n", id);
+    fprintf(infoFile, "%s\n", name);
     return True;
 }
 
