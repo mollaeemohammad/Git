@@ -149,6 +149,33 @@ cli/Cli.c.s:
 	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/cli/Cli.c.s
 .PHONY : cli/Cli.c.s
 
+core/Change.obj: core/Change.c.obj
+
+.PHONY : core/Change.obj
+
+# target to build an object file
+core/Change.c.obj:
+	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/core/Change.c.obj
+.PHONY : core/Change.c.obj
+
+core/Change.i: core/Change.c.i
+
+.PHONY : core/Change.i
+
+# target to preprocess a source file
+core/Change.c.i:
+	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/core/Change.c.i
+.PHONY : core/Change.c.i
+
+core/Change.s: core/Change.c.s
+
+.PHONY : core/Change.s
+
+# target to generate assembly for a file
+core/Change.c.s:
+	$(MAKE) -f CMakeFiles\GitProject.dir\build.make CMakeFiles/GitProject.dir/core/Change.c.s
+.PHONY : core/Change.c.s
+
 core/Core.obj: core/Core.c.obj
 
 .PHONY : core/Core.obj
@@ -269,6 +296,9 @@ help:
 	@echo ... cli/Cli.obj
 	@echo ... cli/Cli.i
 	@echo ... cli/Cli.s
+	@echo ... core/Change.obj
+	@echo ... core/Change.i
+	@echo ... core/Change.s
 	@echo ... core/Core.obj
 	@echo ... core/Core.i
 	@echo ... core/Core.s

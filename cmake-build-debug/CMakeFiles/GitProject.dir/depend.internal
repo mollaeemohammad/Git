@@ -4,12 +4,21 @@
 CMakeFiles/GitProject.dir/cli/Cli.c.obj
  D:/GitProject/cli/Cli.c
  D:/GitProject/cli/Cli.h
+ D:/GitProject/core/Change.h
+ D:/GitProject/core/Core.h
+ D:/GitProject/core/FileHelper.h
+ D:/GitProject/core/Log.h
+ D:/GitProject/core/Macros.h
+CMakeFiles/GitProject.dir/core/Change.c.obj
+ D:/GitProject/core/Change.c
+ D:/GitProject/core/Change.h
  D:/GitProject/core/Core.h
  D:/GitProject/core/FileHelper.h
  D:/GitProject/core/Log.h
  D:/GitProject/core/Macros.h
 CMakeFiles/GitProject.dir/core/Core.c.obj
  D:/GitProject/cli/Cli.h
+ D:/GitProject/core/Change.h
  D:/GitProject/core/Core.c
  D:/GitProject/core/Core.h
  D:/GitProject/core/FileHelper.h
@@ -20,6 +29,7 @@ CMakeFiles/GitProject.dir/core/FileHelper.c.obj
  D:/GitProject/core/FileHelper.h
  D:/GitProject/core/Macros.h
 CMakeFiles/GitProject.dir/core/Log.c.obj
+ D:/GitProject/core/Change.h
  D:/GitProject/core/Core.h
  D:/GitProject/core/FileHelper.h
  D:/GitProject/core/Log.c
@@ -27,6 +37,7 @@ CMakeFiles/GitProject.dir/core/Log.c.obj
  D:/GitProject/core/Macros.h
 CMakeFiles/GitProject.dir/main.c.obj
  D:/GitProject/cli/Cli.h
+ D:/GitProject/core/Change.h
  D:/GitProject/core/Core.h
  D:/GitProject/core/FileHelper.h
  D:/GitProject/core/Log.h
