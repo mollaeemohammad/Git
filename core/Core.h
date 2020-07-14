@@ -52,3 +52,5 @@ void gotoId(String *HEADArray, int id);
 void reset(String *HEADArray, int id);
 
 enum Boolean stash(String *HEADArray, int id);
+
+enum Boolean popStash();

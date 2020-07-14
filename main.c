@@ -61,6 +61,7 @@ int main() {
 //    maker(newArray, HEADArray, 1);
 //    gotoId(HEADArray, 1);
 //    reset(HEADArray, 1);
-    stash(HEADArray, 1);
+    //stash(HEADArray, 1);
+    popStash();
     return 0;
 }

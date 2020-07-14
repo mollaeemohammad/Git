@@ -160,23 +160,23 @@ void gotoId(String *HEADArray, int id) {
 
 void reset(String *HEADArray, int id) {
     gotoId(HEADArray, id);
-    deleteFolders(id+1);
+    deleteFolders(id + 1);
 }
 
 enum Boolean stash(String *HEADArray, int id) {
     FILE *stash = fopen(".\\git\\stash\\stash.txt", "w");
-    if(stash == NULL)
+    if (stash == NULL)
         return False;
     gotoId(HEADArray, id);
-    for(int i =0; HEADArray[i][0]; i++){
-        fprintf(stash, "%s",HEADArray[i]);
+    for (int i = 0; HEADArray[i][0]; i++) {
+        fprintf(stash, "%s", HEADArray[i]);
     }
     return True;
 }
 
-enum Boolean popStash(){
+enum Boolean popStash() {
     FILE *stash = fopen(".\\git\\stash\\stash.txt", "r");
-    if(stash == NULL)
+    if (stash == NULL)
         return False;
     fclose(stash);
     delete(".\\git\\stash", "stash.txt", File);
