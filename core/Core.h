@@ -8,7 +8,7 @@
 #include "Log.h"
 #include "Change.h"
 
-#define MAX_SIZE_FILE 10000
+#define MAX_SIZE_FILE 1000
 #define MAX_ARRAY_SIZE 1000
 #define MIN_ARRAY_SIZE 100
 
@@ -43,7 +43,7 @@ enum Boolean getInformation(struct information *inform);
 
 enum Boolean writeInformation(String name, int id);
 
-enum Boolean commit(struct Diff *diff, String *fileArray);
+struct CommitData *commit(struct Diff *diff, String *fileArray, String message);
 
 void maker(String *newArray, String *HEADArray, int id);
 

@@ -121,12 +121,22 @@ enum Boolean writeInformation(String name, int id) {
     return True;
 }
 
-enum Boolean commit(struct Diff *diff, String *fileArray) {
+struct CommitData *commit(struct Diff *diff, String *fileArray, String message) {
     writeDiffPage(diff);
     struct information *inform = (struct Information *) malloc(sizeof(struct Information *));
     inform->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
     getInformation(inform);
     writeInformation(inform->fileName, inform->id + 1);
+    struct CommitData *commit = makeCommitData(inform->id + 1, message);
+    String addressString = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+    String commitFileInner = (String) malloc(sizeof(char) * MAX_LINE_SIZE * 2);
+    sprintf(commitFileInner, "    {\n"
+                   "      \t\"id\": %i,\n"
+                   "      \t\"date\": %s,\n"
+                   "      \t\"message\": \"%s\",\n"
+                   "    },\n", commit->id, commit->date, commit->message);
+    sprintf(addressString, ".\\git\\commits\\%d",commit->id);
+    writeFile(addressString, "log.txt", commitFileInner);
     FILE *HEAD = fopen(".\\git\\HEAD.txt", "w");
     for (int i = 0; i < diff->size; i++) {
         fprintf(HEAD, "%s", fileArray[i]);

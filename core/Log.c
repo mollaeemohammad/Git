@@ -10,6 +10,8 @@
  */
 struct CommitData *makeCommitData(int id, String message) {
     struct CommitData *commit = (struct CommitData *) malloc(sizeof(struct CommitData *));
+    commit->date = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+    commit->message = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
     commit->date = currentTime();
     commit->id = id;
     commit->message = message;
