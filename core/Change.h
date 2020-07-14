@@ -22,6 +22,8 @@ struct Diff {
     struct StringOrAddress *parameter;
 };
 
+enum Boolean isChanged(String nameOfFile);
+
 struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray[]);
 
 void showChanges(struct Diff *diff);

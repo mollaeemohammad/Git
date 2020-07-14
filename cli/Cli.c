@@ -4,9 +4,9 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
-#define MAX_FILE_NAME 500
+#define MAX_FILE_NAME 256
 #define MAX_PATH_CHAR 100
-#define MAX_ITEM_MEMORY 2000
+#define MAX_ITEM_MEMORY 1000
 
 struct fileId {
     String fileName;
@@ -33,7 +33,7 @@ void changeConsoleColor(int colorCode) {
     SetConsoleTextAttribute(hConsole, colorCode);
 }
 
-void changeDesk(String fileName,String funcName){
+void changeDesk(String fileName, String funcName) {
     String *fileArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
     String *HEADArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
     for (int i = 0; i < MAX_LINE_NUMBER; i++) {
@@ -41,12 +41,32 @@ void changeDesk(String fileName,String funcName){
         HEADArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
     }
     struct Diff *diff;
-    diff = findChanges(fileName, fileArray, HEADArray);
+    int selectFlag;
 
-    if(!strcmp(funcName, "initGit")){
-        if(initGit()){
+    if (!strcmp(funcName, "initGit")) {
+        if (initGit()) {
             changeConsoleColor(COLOR_BLOCK_GREEN);
             printf("The initialization is done\n\n");
+            changeConsoleColor(COLOR_WHITE);
+        } else {
+            if (!strcmp(funcName, "status")) {
+                if (isChanged(fileName)) {
+                    diff = findChanges(fileName, fileArray, HEADArray);
+                    showChanges(diff);
+                } else {
+                    changeConsoleColor(COLOR_BLOCK_RED);
+                    printf("No Changes!\n\n");
+                    changeConsoleColor(COLOR_WHITE);
+                }
+            }
+            if (!strcmp(funcName, "select")) {
+                FILE *select = fopen(".\\git\\select.txt", "w");
+                fprintf(select, "1");
+            }
+            if (!strcmp(funcName, "commit")){
+
+            }
         }
+
     }
 }

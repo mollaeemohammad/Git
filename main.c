@@ -26,7 +26,7 @@ int main() {
 //    diff = findChanges("test.txt", fileArray, HEADArray);
 
 //    initGit();
-    showLog();
+//    showLog();
 
 //    writeDiffPage(diff);
 
