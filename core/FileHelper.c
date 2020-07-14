@@ -9,9 +9,10 @@
 
 #define MAX_LINE_SIZE 1000
 #define MAX_RESULT_SIZE MAX_LINE_SIZE*99
-#define MAX_FILE_RESULT_COUNT 9999
+#define MAX_FILE_RESULT_COUNT 99
 #define MAX_FILE_NAME 100
 #define FILE_FLAG 0
+#define MAX_COMMITS_NUMBER 100
 
 String fileAddressMaker(String path, String filename);
 
@@ -70,6 +71,9 @@ enum Boolean writeFile(String path, String filename, String content) {
  */
 String *getFilesInDirectory(String path, int *n) {
     String *result = (String *) malloc(sizeof(String) * MAX_FILE_RESULT_COUNT);
+    for (int i = 0; i < MAX_FILE_RESULT_COUNT; i++) {
+        result[i] = (String) malloc(sizeof(char) * MAX_FILE_NAME);
+    }
     int resSize = 0;
 
     struct dirent *dir;
@@ -177,3 +181,14 @@ enum Boolean delete(String filePath, String filename, enum ShowKind kind) {
     }
 }
 
+
+void deleteFolders(int id) {
+    char numberString[5];
+    char addressString[50];
+    for (int i = id; i < MAX_COMMITS_NUMBER; i++) {
+        sprintf(numberString, "%d", i);
+        sprintf(addressString, ".\\git\\commits\\%d", i);
+        if(isFolderExist(addressString))
+            delete(".\\git\\commits", numberString, Folder);
+    }
+}

@@ -61,6 +61,26 @@ D:/GitProject/core/Change.h
 D:/GitProject/core/FileHelper.h
 Macros.h
 D:/GitProject/core/Macros.h
+conio.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+unistd.h
+-
+stdio.h
+-
+stdlib.h
+-
+sys/types.h
+-
+dirent.h
+-
+sys/stat.h
+-
+unistd.h
+-
 
 D:/GitProject/core/Log.h
 stdlib.h

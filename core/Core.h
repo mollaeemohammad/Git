@@ -45,8 +45,10 @@ enum Boolean writeInformation(String name, int id);
 
 enum Boolean commit(struct Diff *diff, String *fileArray);
 
-void maker(String *newArray,String *HEADArray, int id);
+void maker(String *newArray, String *HEADArray, int id);
 
 void gotoId(String *HEADArray, int id);
 
 void reset(String *HEADArray, int id);
+
+enum Boolean stash(String *HEADArray, int id);

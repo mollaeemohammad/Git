@@ -159,18 +159,28 @@ void gotoId(String *HEADArray, int id) {
 }
 
 void reset(String *HEADArray, int id) {
-    int numberOfFoldersInCommits, tempNumber;
-    char numberString[5];
-    String *filesInDir;
-    filesInDir = getFilesInDirectory(".\\git\\commits", &numberOfFoldersInCommits);
     gotoId(HEADArray, id);
-    for (int i = 0; i < numberOfFoldersInCommits; i++) {
-        sscanf(filesInDir[i], "%d", &tempNumber);
-        if (tempNumber > id) {
-            sprintf(numberString, "%d", tempNumber);
-            delete(".\\git\\commits", numberString, Folder);
-        }
+    deleteFolders(id+1);
+}
+
+enum Boolean stash(String *HEADArray, int id) {
+    FILE *stash = fopen(".\\git\\stash\\stash.txt", "w");
+    if(stash == NULL)
+        return False;
+    gotoId(HEADArray, id);
+    for(int i =0; HEADArray[i][0]; i++){
+        fprintf(stash, "%s",HEADArray[i]);
     }
+    return True;
+}
+
+enum Boolean popStash(){
+    FILE *stash = fopen(".\\git\\stash\\stash.txt", "r");
+    if(stash == NULL)
+        return False;
+    fclose(stash);
+    delete(".\\git\\stash", "stash.txt", File);
+    return True;
 }
 
 /**
