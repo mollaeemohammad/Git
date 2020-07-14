@@ -54,3 +54,5 @@ void reset(String *HEADArray, int id);
 enum Boolean stash(String *HEADArray, int id);
 
 enum Boolean popStash();
+
+void showLog();

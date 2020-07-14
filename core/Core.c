@@ -29,9 +29,9 @@ String currentTime() {
  */
 enum Boolean initGit() {
     enum Boolean gitStatus, commits;
-    struct logData *firstLog;
     String nameFile = (String) malloc(sizeof(char) * FILENAME_MAX);
     String forInfo = (String) malloc(sizeof(char) * FILENAME_MAX);
+    String log = (String) malloc(sizeof(char) * MAX_LINE_SIZE * 2);
     String headFile;
     if (isFolderExist(".\\git")) {
         print("the git is initialized in past");
@@ -50,9 +50,6 @@ enum Boolean initGit() {
 
         writeFile(".\\git", "status.txt", "");
 
-        firstLog = initLogData(".\\", nameFile);
-        writeFile(".\\git", "log.txt", toJson(firstLog));
-
         writeFile(".\\git", "select.txt", "");
 
         writeFile(".\\git", "HEAD.txt", headFile);
@@ -61,6 +58,12 @@ enum Boolean initGit() {
 
         if (commits) {
             _mkdir(".\\git\\commits\\0");
+            sprintf(log, "    {\n"
+                         "      \t\"id\": %i,\n"
+                         "      \t\"date\": %s,\n"
+                         "      \t\"message\": \"%s\",\n"
+                         "    },\n", 0, currentTime(), "Initialized");
+            writeFile(".\\git\\commits\\0", "log.txt", log);
             writeFile(".\\git\\commits\\0", "file.txt", headFile);
             return True;
         } else
@@ -131,11 +134,11 @@ struct CommitData *commit(struct Diff *diff, String *fileArray, String message) 
     String addressString = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
     String commitFileInner = (String) malloc(sizeof(char) * MAX_LINE_SIZE * 2);
     sprintf(commitFileInner, "    {\n"
-                   "      \t\"id\": %i,\n"
-                   "      \t\"date\": %s,\n"
-                   "      \t\"message\": \"%s\",\n"
-                   "    },\n", commit->id, commit->date, commit->message);
-    sprintf(addressString, ".\\git\\commits\\%d",commit->id);
+                             "      \t\"id\": %i,\n"
+                             "      \t\"date\": %s,\n"
+                             "      \t\"message\": \"%s\",\n"
+                             "    },\n", commit->id, commit->date, commit->message);
+    sprintf(addressString, ".\\git\\commits\\%d", commit->id);
     writeFile(addressString, "log.txt", commitFileInner);
     FILE *HEAD = fopen(".\\git\\HEAD.txt", "w");
     for (int i = 0; i < diff->size; i++) {
@@ -208,3 +211,18 @@ String strConcat(String list[], int size) {
 
 }
 
+void showLog() {
+    char tempAddress[50];
+    String resultLogs = (String) malloc(sizeof(char) * MAX_SIZE_ITEM_STRING);
+    String tempLog;
+    struct information *inform = (struct information *) malloc(sizeof(struct information *));
+    inform->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
+    if (getInformation(inform)) {
+        for (int i = 0; i <= inform->id; i++) {
+            sprintf(tempAddress, ".\\git\\commits\\%d", i);
+            tempLog = readFile(tempAddress, "log.txt");
+            strcat(resultLogs, tempLog);
+        }
+        printf("%s", resultLogs);
+    }
+}

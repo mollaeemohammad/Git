@@ -5,8 +5,8 @@
 #include <sys/time.h>
 
 #define MAX_FILE_NAME 500
-#define MAX_PATH_CHAR 1000
-#define MAX_ITEM_MEMORY 20000
+#define MAX_PATH_CHAR 100
+#define MAX_ITEM_MEMORY 2000
 
 struct fileId {
     String fileName;
@@ -33,37 +33,20 @@ void changeConsoleColor(int colorCode) {
     SetConsoleTextAttribute(hConsole, colorCode);
 }
 
-/**
- * saves your current judge histories (public and private)
- */
-int saveCurrentHistory() {
+void changeDesk(String fileName,String funcName){
+    String *fileArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
+    String *HEADArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
+    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
+        fileArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
+        HEADArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
+    }
+    struct Diff *diff;
+    diff = findChanges(fileName, fileArray, HEADArray);
 
-}
-
-/**
- * this function saves the file chosen by user in hidden directory
- */
-int saveHiddenHistory() {
-
-}
-
-/**
- * this function shows you the name of all items and their IDs in the hidden history directory.
- */
-void showHistoryList() {
-
-}
-
-/**
- * as you can guess this function shows an specific file available in the hidden directory that contains your results history
- */
-int showHistoryFile() {
-
-}
-
-/**
- * this function is menu that contains two options. Based on user argument it acts differently
- */
-int historyMenu(String userArgument) {
-
+    if(!strcmp(funcName, "initGit")){
+        if(initGit()){
+            changeConsoleColor(COLOR_BLOCK_GREEN);
+            printf("The initialization is done\n\n");
+        }
+    }
 }
