@@ -34,7 +34,7 @@ enum Boolean initGit() {
     String log = (String) malloc(sizeof(char) * MAX_LINE_SIZE * 2);
     String headFile;
     if (isFolderExist(".\\git")) {
-        print("the git is initialized in past");
+        print("the git is initialized in past\n");
         return True;
     }
     gitStatus = !_mkdir(".\\git");
@@ -47,8 +47,6 @@ enum Boolean initGit() {
         sprintf(forInfo, "0\n%s", nameFile);
 
         writeFile(".\\git", "Info.txt", forInfo);
-
-        writeFile(".\\git", "status.txt", "");
 
         writeFile(".\\git", "select.txt", "");
 
@@ -124,8 +122,7 @@ enum Boolean writeInformation(String name, int id) {
     return True;
 }
 
-struct CommitData *commit(struct Diff *diff, String *fileArray, String message) {
-    writeDiffPage(diff);
+void commit(struct Diff *diff, String *fileArray, String message) {
     struct information *inform = (struct information *) malloc(sizeof(struct information *));
     inform->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
     getInformation(inform);
@@ -139,16 +136,20 @@ struct CommitData *commit(struct Diff *diff, String *fileArray, String message) 
                              "      \t\"message\": \"%s\",\n"
                              "    },\n", commit->id, commit->date, commit->message);
     sprintf(addressString, ".\\git\\commits\\%d", commit->id);
+    mkdir(addressString);
     writeFile(addressString, "log.txt", commitFileInner);
+    writeDiffPage(diff);
     FILE *HEAD = fopen(".\\git\\HEAD.txt", "w");
     for (int i = 0; i < diff->size; i++) {
         fprintf(HEAD, "%s", fileArray[i]);
     }
+    fclose(HEAD);
     FILE *select = fopen(".\\git\\select.txt", "w");
     fprintf(select, "0");
+    fclose(select);
 }
 
-void maker(String *newArray, String *HEADArray, int id) {
+int maker(String *newArray, String *HEADArray, int id) {
     struct Diff *tempDiff = (struct Diff *) malloc(sizeof(struct Diff *));
     tempDiff->parameter = (struct StringOrAddress *) malloc(sizeof(struct StringOrAddress) * MAX_LINE_NUMBER);
     tempDiff->sign = (int *) malloc(sizeof(int) * MAX_LINE_NUMBER);
@@ -164,32 +165,46 @@ void maker(String *newArray, String *HEADArray, int id) {
             strcpy(newArray[i], tempDiff->parameter[i].string);
         }
     }
+    return tempDiff->size;
 }
 
-void gotoId(String *HEADArray, int id) {
+int gotoId(String *HEADArray, int id) {
+    int size = 0;
     char addressString[5];
     sprintf(addressString, ".\\git\\commits\\%d", id);
-    if(!isFolderExist(addressString)){
+    if (!isFolderExist(addressString)) {
         changeConsoleColor(COLOR_RED);
         printf("The commit with that id does not exist!\n");
-        return;
+        return 0;
     }
+    FILE *base = fopen(".\\git\\commits\\0\\file.txt", "r");
+    for (int i = 0; !feof(base); i++) {
+        fileGets(HEADArray[i], base);
+        size++;
+    }
+    fclose(base);
     for (int i = 1; i <= id; i++) {
-        maker(HEADArray, HEADArray, i);
+        size = maker(HEADArray, HEADArray, i);
     }
+    return size;
 }
 
 void reset(String *HEADArray, int id) {
-    gotoId(HEADArray, id);
+    int size = gotoId(HEADArray, id);
     deleteFolders(id + 1);
+    FILE *HEAD = fopen(".\\git\\HEAD.txt", "w");
+    for(int i =0; i<size; i++){
+        fprintf(HEAD, "%s", HEADArray[i]);
+    }
+    fclose(HEAD);
 }
 
 enum Boolean stash(String *HEADArray, int id) {
     FILE *stash = fopen(".\\git\\stash\\stash.txt", "w");
     if (stash == NULL)
         return False;
-    gotoId(HEADArray, id);
-    for (int i = 0; HEADArray[i][0]; i++) {
+    int size = gotoId(HEADArray, id);
+    for (int i = 0; i<size+1; i++) {
         fprintf(stash, "%s", HEADArray[i]);
     }
     fclose(stash);

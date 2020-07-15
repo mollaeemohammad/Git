@@ -8,64 +8,55 @@
 #include "core/Change.h"
 
 
-int main() {
-    //delete("D:\\GitProject", "GitProject", Folder);
-//    _mkdir(".\\test");
-//    if(initGit())
-//        printf("ok");
-//    else
-//        printf("fault");
+void help() {
+    changeConsoleColor(COLOR_LIGHT_BLUE);
+    printf("It seems you may want some help\n");
+    changeConsoleColor(COLOR_BLOCK_GREEN);
+    printf("initialize git for the file ");
+    changeConsoleColor(COLOR_WHITE);
+    printf("git initGit\n");
+    changeConsoleColor(COLOR_BLOCK_GREEN);
+    printf("Show status of file ");
+    changeConsoleColor(COLOR_WHITE);
+    printf("git status\n");
+    changeConsoleColor(COLOR_BLOCK_GREEN);
+    printf("To select/unselect the file ");
+    changeConsoleColor(COLOR_WHITE);
+    printf("git select/unselect\n");
+    changeConsoleColor(COLOR_BLOCK_GREEN);
+    printf("To commit the changes ");
+    changeConsoleColor(COLOR_WHITE);
+    printf("git commit\n");
+    changeConsoleColor(COLOR_BLOCK_GREEN);
+    printf("To stash/popStash the file ");
+    changeConsoleColor(COLOR_WHITE);
+    printf("git stash/popstash\n");
+    changeConsoleColor(COLOR_BLOCK_YELLOW);
+    printf("The file id which you want is in stash folder in git\n");
+    changeConsoleColor(COLOR_RED);
+    printf("Warning: just one popstash for each stash you could do\n");
+    changeConsoleColor(COLOR_BLOCK_GREEN);
+    printf("To show history of commits ");
+    changeConsoleColor(COLOR_WHITE);
+    printf("git showlog\n");
+    changeConsoleColor(COLOR_BLOCK_GREEN);
+    printf("To reset the file to id which you want ");
+    changeConsoleColor(COLOR_WHITE);
+    printf("git reset id (id is a number)\n");
+}
 
-//    String *fileArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
-//    String *HEADArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
-//    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
-//        fileArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
-//        HEADArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
-//    }
-//    struct Diff *diff;
-//    diff = findChanges("test.txt", fileArray, HEADArray);
 
-//    initGit();
-//    showLog();
-
-//    writeDiffPage(diff);
-
-//    for(int i =0; i<diff->size; i++){
-//        if(diff->sign[i] == 0)
-//            printf("%s",diff->parameter[i].string);
-//        else if(diff->sign[i] == 1){
-//            printf("%d\n", diff->parameter[i].address);
-//        }
-//    }
-//    showChanges(diff);
-
-//    struct information *testInfo = (struct information *) malloc(sizeof(struct information*));
-//    testInfo->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
-//    getInformation(testInfo);
-//    printf("%d\n%s", testInfo->id, testInfo->fileName);
-
-//    struct Diff *diff = (struct Diff *) malloc(sizeof(struct Diff *));
-//    diff->sign = (int *) malloc(sizeof(int) * MAX_LINE_NUMBER);
-//    diff->parameter = (struct StringOfAddress *) malloc(sizeof(struct StringOfAddress *) * MAX_LINE_NUMBER);
-//    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
-//        diff->parameter[i].string = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
-//        diff->sign[i] = (int) malloc(sizeof(int));
-//    }
-//    getDiffPage(diff, 1);
-//    printf("%d\n", diff->sign[0]);
-
-//    writeInformation("main.c", 0);
-
-//    commit(diff, fileArray, "hey how are you?\nOk?");
-
-//    String *newArray = (String *) malloc(sizeof(String *) * MAX_LINE_NUMBER);
-//    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
-//        newArray[i] = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
-//    }
-//    maker(newArray, HEADArray, 1);
-//    gotoId(HEADArray, 1);
-//    reset(HEADArray, 1);
-    //stash(HEADArray, 1);
-//    popStash();
+int main(int narg, String *args) {
+    if (narg == 1) {
+        help();
+        return 0;
+    }
+    String *command = (String *) malloc(sizeof(char) * MAX_LINE_SIZE);
+    for (int i = 0; i < narg - 2; i++) {
+        command[i] = (String) malloc(sizeof(char) * MAX_WORD_SIZE);
+        command[i][0] = '\0';
+        strcpy(command[i], args[i + 2]);
+    }
+    changeDesk(args[1], narg, command);
     return 0;
 }

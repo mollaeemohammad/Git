@@ -2,7 +2,7 @@
 
 enum Boolean isChanged(String nameOfFile) {
 
-    String innerOfFile = readFile(".\\", nameOfFile);
+    String innerOfFile = readFile(".", nameOfFile);
     String innerOfHEAD = readFile(".\\git", "HEAD.txt");
     return strcmp(innerOfFile, innerOfHEAD) ? True : False;
 }
@@ -22,7 +22,7 @@ struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray
         tempDiff->sign[i] = (int) malloc(sizeof(int));
     }
 
-    sprintf(filesAddress, ".\\%s", nameOfFile);
+    sprintf(filesAddress, "%s", nameOfFile);
     FILE *file = fopen(filesAddress, "r");
     sprintf(filesAddress, ".\\git\\HEAD.txt");
     FILE *HEAD = fopen(filesAddress, "r");
@@ -35,6 +35,8 @@ struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray
     while (tempLineHEAD = fileGets(tempLineHEAD, HEAD)) {
         strcpy(HEADArray[sizeOfHEAD++], tempLineHEAD);
     }
+    fclose(file);
+    fclose(HEAD);
     for (int i = 0; i < sizeOfFile; i++) {
         found = 0;
         for (int j = i; j < sizeOfHEAD; j++) {
@@ -70,7 +72,7 @@ void writeDiffPage(struct Diff *diff) {
     tempInfo->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
     if (getInformation(tempInfo)) {
         String fileAddress = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
-        sprintf(fileAddress, ".\\git\\commits\\%d\\diffPage.txt", tempInfo->id + 1);
+        sprintf(fileAddress, ".\\git\\commits\\%d\\diffPage.txt", tempInfo->id);
         FILE *diffPage = fopen(fileAddress, "w");
         if (diffPage == NULL)
             return;
@@ -102,7 +104,7 @@ enum Boolean getDiffPage(struct Diff *diff, int id) {
             fscanf(diffPage, "%d", &diff->parameter[i].address);
         } else if (diff->sign[i] == 0) {
             parasite = fgetc(diffPage);
-            fscanf(diffPage, "%[^\n]", diff->parameter[i].string);
+            fileGets(diff->parameter[i].string, diffPage);
         }
         size++;
     }

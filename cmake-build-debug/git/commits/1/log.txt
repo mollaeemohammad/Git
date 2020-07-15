@@ -1,6 +1,0 @@
-    {
-      	"id": 1,
-      	"date": 2020-07-14 17:28:41,
-      	"message": "hey how are you?
-Ok?",
-    },

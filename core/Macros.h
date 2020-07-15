@@ -3,6 +3,7 @@
 typedef char* String;
 #define loop(i,n) for (int i = 0 ; i<n;i++)
 #define print printf
+#define MAX_WORD_SIZE 20
 #define foreach(item, array) \
     for(int keep=1, \
             count=0,\

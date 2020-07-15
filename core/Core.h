@@ -43,11 +43,11 @@ enum Boolean getInformation(struct information *inform);
 
 enum Boolean writeInformation(String name, int id);
 
-struct CommitData *commit(struct Diff *diff, String *fileArray, String message);
+void commit(struct Diff *diff, String *fileArray, String message);
 
-void maker(String *newArray, String *HEADArray, int id);
+int maker(String *newArray, String *HEADArray, int id);
 
-void gotoId(String *HEADArray, int id);
+int gotoId(String *HEADArray, int id);
 
 void reset(String *HEADArray, int id);
 

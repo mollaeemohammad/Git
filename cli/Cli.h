@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../core/Core.h"
+#include "../core/Change.h"
 #define COLOR_WHITE 7
 #define COLOR_YELLOW 6
 #define COLOR_LIGHT_BLUE 1
@@ -15,4 +16,4 @@ void changeConsoleColor(int colorCode);
 
 int runCli(int argc, String argv[]);
 
-void changeDesk(String funcName, int nargs, String *args)
+void changeDesk(String funcName, int nargs, String *args);

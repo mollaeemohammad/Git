@@ -1,2 +1,2 @@
 1
-main.c
+test.txt
