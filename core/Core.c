@@ -126,7 +126,7 @@ enum Boolean writeInformation(String name, int id) {
 
 struct CommitData *commit(struct Diff *diff, String *fileArray, String message) {
     writeDiffPage(diff);
-    struct information *inform = (struct Information *) malloc(sizeof(struct Information *));
+    struct information *inform = (struct information *) malloc(sizeof(struct information *));
     inform->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
     getInformation(inform);
     writeInformation(inform->fileName, inform->id + 1);
@@ -144,7 +144,8 @@ struct CommitData *commit(struct Diff *diff, String *fileArray, String message) 
     for (int i = 0; i < diff->size; i++) {
         fprintf(HEAD, "%s", fileArray[i]);
     }
-    return True;
+    FILE *select = fopen(".\\git\\select.txt", "w");
+    fprintf(select, "0");
 }
 
 void maker(String *newArray, String *HEADArray, int id) {
@@ -166,6 +167,13 @@ void maker(String *newArray, String *HEADArray, int id) {
 }
 
 void gotoId(String *HEADArray, int id) {
+    char addressString[5];
+    sprintf(addressString, ".\\git\\commits\\%d", id);
+    if(!isFolderExist(addressString)){
+        changeConsoleColor(COLOR_RED);
+        printf("The commit with that id does not exist!\n");
+        return;
+    }
     for (int i = 1; i <= id; i++) {
         maker(HEADArray, HEADArray, i);
     }
@@ -184,6 +192,7 @@ enum Boolean stash(String *HEADArray, int id) {
     for (int i = 0; HEADArray[i][0]; i++) {
         fprintf(stash, "%s", HEADArray[i]);
     }
+    fclose(stash);
     return True;
 }
 
