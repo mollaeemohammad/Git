@@ -12,7 +12,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-enum ShowKind {File, Folder};
+enum ShowKind {
+    File, Folder
+};
 
 String readFile(String path, String filename);
 

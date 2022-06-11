@@ -1,7 +1,7 @@
 #pragma once
 
-typedef char* String;
-#define loop(i,n) for (int i = 0 ; i<n;i++)
+typedef char *String;
+#define loop(i, n) for (int i = 0 ; i<n;i++)
 #define print printf
 #define MAX_WORD_SIZE 20
 #define foreach(item, array) \
@@ -12,4 +12,6 @@ typedef char* String;
         keep = !keep, count++) \
       for(item = (array)+count; keep; keep = !keep)
 #define swap(x, y, T) do { T tmp = (x); (x) = (y); (y) = tmp; } while(0)
-enum Boolean {False,True};
+enum Boolean {
+    False, True
+};

@@ -20,6 +20,12 @@ void changeConsoleColor(int colorCode) {
     SetConsoleTextAttribute(hConsole, colorCode);
 }
 
+/**
+ * all funcs are used at here
+ * @param funcName
+ * @param nargs
+ * @param args
+ */
 void changeDesk(String funcName, int nargs, String *args) {
     String *fileArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
     String *HEADArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
@@ -133,6 +139,7 @@ void changeDesk(String funcName, int nargs, String *args) {
             }
             sscanf(args[0], "%d", &id);
             reset(HEADArray, id);
+            writeInformation(inform->fileName, id);
             changeConsoleColor(COLOR_WHITE);
             printf("Reset to version %d is done", id);
         }

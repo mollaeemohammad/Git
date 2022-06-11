@@ -181,14 +181,17 @@ enum Boolean delete(String filePath, String filename, enum ShowKind kind) {
     }
 }
 
-
+/**
+ * deletes the folder even if somethings be on that
+ * @param id
+ */
 void deleteFolders(int id) {
     char numberString[5];
     char addressString[50];
     for (int i = id; i < MAX_COMMITS_NUMBER; i++) {
         sprintf(numberString, "%d", i);
         sprintf(addressString, ".\\git\\commits\\%d", i);
-        if(isFolderExist(addressString))
+        if (isFolderExist(addressString))
             delete(".\\git\\commits", numberString, Folder);
     }
 }

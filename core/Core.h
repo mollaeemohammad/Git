@@ -45,7 +45,7 @@ enum Boolean writeInformation(String name, int id);
 
 void commit(struct Diff *diff, String *fileArray, String message);
 
-int maker(String *newArray, String *HEADArray, int id);
+int maker(String *HEADArray, int id);
 
 int gotoId(String *HEADArray, int id);
 

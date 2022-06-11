@@ -98,6 +98,11 @@ String toJson(struct logData *data) {
 
 }
 
+/**
+ * gets information of file from info file
+ * @param inform
+ * @return
+ */
 enum Boolean getInformation(struct information *inform) {
     FILE *file;
     file = fopen("git\\Info.txt", "r");
@@ -112,6 +117,12 @@ enum Boolean getInformation(struct information *inform) {
     return True;
 }
 
+/**
+ * writes new information in info file
+ * @param name
+ * @param id
+ * @return
+ */
 enum Boolean writeInformation(String name, int id) {
     FILE *infoFile = fopen(".\\git\\Info.txt", "w");
     if (infoFile == NULL)
@@ -122,6 +133,12 @@ enum Boolean writeInformation(String name, int id) {
     return True;
 }
 
+/**
+ * commits the changed file
+ * @param diff
+ * @param fileArray
+ * @param message
+ */
 void commit(struct Diff *diff, String *fileArray, String message) {
     struct information *inform = (struct information *) malloc(sizeof(struct information *));
     inform->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
@@ -149,7 +166,17 @@ void commit(struct Diff *diff, String *fileArray, String message) {
     fclose(select);
 }
 
-int maker(String *newArray, String *HEADArray, int id) {
+/**
+ * makes HEADArray from diff pages
+ * @param HEADArray
+ * @param id
+ * @return
+ */
+int maker(String *HEADArray, int id) {
+    String *newArray = (String *) malloc(MAX_LINE_NUMBER * sizeof(String));
+    for (int i = 0; i < MAX_LINE_NUMBER; i++) {
+        newArray[i] = (String) malloc(MAX_LINE_SIZE * sizeof(char));
+    }
     struct Diff *tempDiff = (struct Diff *) malloc(sizeof(struct Diff *));
     tempDiff->parameter = (struct StringOrAddress *) malloc(sizeof(struct StringOrAddress) * MAX_LINE_NUMBER);
     tempDiff->sign = (int *) malloc(sizeof(int) * MAX_LINE_NUMBER);
@@ -165,6 +192,10 @@ int maker(String *newArray, String *HEADArray, int id) {
             strcpy(newArray[i], tempDiff->parameter[i].string);
         }
     }
+    for (int j = 0; j < tempDiff->size; j++) {
+        strcpy(HEADArray[j], newArray[j]);
+    }
+    free(newArray);
     return tempDiff->size;
 }
 
@@ -184,33 +215,48 @@ int gotoId(String *HEADArray, int id) {
     }
     fclose(base);
     for (int i = 1; i <= id; i++) {
-        size = maker(HEADArray, HEADArray, i);
+        size = maker(HEADArray, i);
     }
     return size;
 }
 
+/**
+ * resets the HEADArray to id which we want
+ * @param HEADArray
+ * @param id
+ */
 void reset(String *HEADArray, int id) {
     int size = gotoId(HEADArray, id);
     deleteFolders(id + 1);
     FILE *HEAD = fopen(".\\git\\HEAD.txt", "w");
-    for(int i =0; i<size; i++){
+    for (int i = 0; i < size; i++) {
         fprintf(HEAD, "%s", HEADArray[i]);
     }
     fclose(HEAD);
 }
 
+/**
+ * stashes the file at stash folder is git folder
+ * @param HEADArray
+ * @param id
+ * @return
+ */
 enum Boolean stash(String *HEADArray, int id) {
     FILE *stash = fopen(".\\git\\stash\\stash.txt", "w");
     if (stash == NULL)
         return False;
     int size = gotoId(HEADArray, id);
-    for (int i = 0; i<size+1; i++) {
+    for (int i = 0; i < size + 1; i++) {
         fprintf(stash, "%s", HEADArray[i]);
     }
     fclose(stash);
     return True;
 }
 
+/**
+ * deletes the stash file in its folder
+ * @return
+ */
 enum Boolean popStash() {
     FILE *stash = fopen(".\\git\\stash\\stash.txt", "r");
     if (stash == NULL)
@@ -235,6 +281,9 @@ String strConcat(String list[], int size) {
 
 }
 
+/**
+ * shows all logs
+ */
 void showLog() {
     char tempAddress[50];
     String resultLogs = (String) malloc(sizeof(char) * MAX_SIZE_ITEM_STRING);

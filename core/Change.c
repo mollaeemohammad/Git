@@ -1,5 +1,10 @@
 #include "Change.h"
 
+/**
+ * if the file is changed this tells us
+ * @param nameOfFile
+ * @return
+ */
 enum Boolean isChanged(String nameOfFile) {
 
     String innerOfFile = readFile(".", nameOfFile);
@@ -7,7 +12,13 @@ enum Boolean isChanged(String nameOfFile) {
     return strcmp(innerOfFile, innerOfHEAD) ? True : False;
 }
 
-
+/**
+ * it finds the changes from last commited file from the new one
+ * @param nameOfFile
+ * @param fileArray
+ * @param HEADArray
+ * @return
+ */
 struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray[]) {
     char filesAddress[50];
 
@@ -39,8 +50,8 @@ struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray
     fclose(HEAD);
     for (int i = 0; i < sizeOfFile; i++) {
         found = 0;
-        for (int j = i; j < sizeOfHEAD; j++) {
-            if (!strcmp(HEADArray[i], fileArray[j])) {
+        for (int j = 0; j < sizeOfHEAD; j++) {
+            if (!strcmp(HEADArray[j], fileArray[i])) {
                 tempDiff->sign[i] = 1;
                 tempDiff->parameter[i].address = j;
                 found = 1;
@@ -55,6 +66,10 @@ struct Diff *findChanges(String nameOfFile, String fileArray[], String HEADArray
     return tempDiff;
 }
 
+/**
+ * show the exact changes
+ * @param diff
+ */
 void showChanges(struct Diff *diff) {
     int isChanged = 0;
     for (int i = 0; i < diff->size; i++) {
@@ -67,6 +82,10 @@ void showChanges(struct Diff *diff) {
         puts("No Changes!");
 }
 
+/**
+ * writes the changes at algorithm
+ * @param diff
+ */
 void writeDiffPage(struct Diff *diff) {
     struct information *tempInfo = (struct information *) malloc(sizeof(struct information *));
     tempInfo->fileName = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
@@ -89,6 +108,12 @@ void writeDiffPage(struct Diff *diff) {
     }
 }
 
+/**
+ * gets the diff page and makes it useful
+ * @param diff
+ * @param id
+ * @return
+ */
 enum Boolean getDiffPage(struct Diff *diff, int id) {
     char parasite;
     String diffPageAddress = (String) malloc(sizeof(char) * MAX_LINE_SIZE);
